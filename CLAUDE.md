@@ -40,6 +40,30 @@ SPEC 004 — lista para plan
 El `.md` sigue siendo la fuente de verdad y queda en `specs/`; la tarjeta es la interfaz con el
 dueño. Si pide detalle, se le entrega solo la sección pedida, no el archivo entero.
 
+### El ciclo no cierra a la primera
+
+Las fases que producen artefactos se verifican, y la verificación se repite después de cada
+corrección. Una sola pasada no vale: es una foto del estado anterior.
+
+- **`clarify` se corre siempre** después de `specify`, aunque parezca que no queda nada por
+  preguntar: su barrido estructurado encuentra ambigüedades que la conversación previa no vio. Si no
+  hay nada que preguntar, la salida es «sin preguntas» y se anota. Se vuelve a correr cada vez que
+  `analyze` detecte una ambigüedad. Las de producto —fórmulas, límites, denominadores, reglas de
+  negocio— se preguntan al dueño; no se resuelven con una recomendación del agente.
+- **`analyze` es obligatorio** después de `tasks` y **se vuelve a correr tras cada tanda de
+  correcciones**. No se pasa a `implement` con hallazgos críticos o altos abiertos.
+- **La condición de salida no es «cero hallazgos»** —`analyze` siempre encuentra algo—, sino:
+  cero críticos y cero altos, y los medios y bajos que queden escritos en la tarjeta para que el
+  dueño los acepte. Un hallazgo aceptado es deuda conocida; uno silenciado no existe.
+- **`converge` hace lo mismo después de `implement`**: compara el código con la spec, añade a
+  `tasks.md` lo que falte y se repite hasta que no quede trabajo sin construir.
+
+```
+specify → clarify → GATE
+plan → tasks → analyze → corrige → analyze → GATE
+implement → converge → corrige → converge → GATE
+```
+
 Sin commit ni push hasta que el dueño lo pida.
 
 ## Reglas propias del proyecto

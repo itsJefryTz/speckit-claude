@@ -41,28 +41,25 @@ lo leen las skills. Tampoco trae features de ejemplo, para que el primer `specif
   TÚ                          AGENTE                          QUEDA EN
   ─────────────────────────────────────────────────────────────────────────
   «quiero X» en una línea ──► create-new-feature ──► specs/NNN-x/
-                              + speckit-specify
+                              speckit-specify
+                              speckit-clarify   (obligatorio)
                                                         └─► GATE  spec.md
 
-  lees la tarjeta, respondes ► ¿huecos? speckit-clarify
-                              └─► spec.md corregida
-
   «sigue» ──────────────────► speckit-plan
+                              speckit-tasks
+                              speckit-analyze ──► corrige ──► analyze
                                                         └─► GATE  plan.md
-                                                                   research.md
-                                                                   data-model.md
-                                                                   contracts/
-
-  «sigue» ──────────────────► speckit-tasks
-                                                        └─► tasks.md
-
-  (opcional) ───────────────► speckit-analyze / speckit-checklist
+                                                                   tasks.md
 
   «a código» ───────────────► speckit-implement
+                              speckit-converge ──► corrige ──► converge
                                                         └─► GATE  diff + tests
 
   «haz el git» ─────────────► commit
 ```
+
+`clarify`, `analyze` y `converge` no son una pasada: se repiten después de cada corrección hasta
+que no queden hallazgos críticos ni altos. Lo que sobreviva se acepta en la tarjeta, no se silencia.
 
 En cada gate la tarjeta tiene la misma forma:
 
