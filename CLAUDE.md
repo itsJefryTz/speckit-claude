@@ -55,13 +55,15 @@ corrección. Una sola pasada no vale: es una foto del estado anterior.
 - **La condición de salida no es «cero hallazgos»** —`analyze` siempre encuentra algo—, sino:
   cero críticos y cero altos, y los medios y bajos que queden escritos en la tarjeta para que el
   dueño los acepte. Un hallazgo aceptado es deuda conocida; uno silenciado no existe.
-- **`converge` hace lo mismo después de `implement`**: compara el código con la spec, añade a
-  `tasks.md` lo que falte y se repite hasta que no quede trabajo sin construir.
+- **`converge` no corre con tareas abiertas.** Exige que todas las tareas de `tasks.md` estén
+  marcadas `[X]`; si queda alguna, primero se termina con `implement`. Después compara el código con
+  la spec, añade a `tasks.md` lo que ninguna tarea cubrió y se repite hasta que no quede trabajo sin
+  construir. Correrlo antes duplica lo pendiente en vez de cerrarlo.
 
 ```
 specify → clarify → GATE
 plan → tasks → analyze → corrige → analyze → GATE
-implement → converge → corrige → converge → GATE
+implement (todo [X]) → converge → corrige → converge → GATE
 ```
 
 Sin commit ni push hasta que el dueño lo pida.

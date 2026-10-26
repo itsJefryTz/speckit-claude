@@ -51,7 +51,7 @@ lo leen las skills. Tampoco trae features de ejemplo, para que el primer `specif
                                                         └─► GATE  plan.md
                                                                    tasks.md
 
-  «a código» ───────────────► speckit-implement
+  «a código» ───────────────► speckit-implement   (todas las tareas [X])
                               speckit-converge ──► corrige ──► converge
                                                         └─► GATE  diff + tests
 
